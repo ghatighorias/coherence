@@ -213,7 +213,6 @@ defmodule Coherence.Config do
   end
 
   def mailer? do
-    !!Application.get_env(:coherence, CoherenceDemo.Coherence.Mailer)
+    !!Application.get_env(:coherence, Module.concat(web_module(), Coherence.Mailer))
   end
-
 end
