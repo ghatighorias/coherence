@@ -43,7 +43,11 @@ defmodule Coherence.PasswordController do
   @spec create(conn, params) :: conn
   def create(conn, %{"password" => password_params} = params) do
     user_schema = Config.user_schema
-    email = password_params["email"]
+    email =
+      password_params["email"]
+      |> String.downcase()
+      |> String.trim()
+
     user =
       user_schema
       |> where([u], u.email == ^email)

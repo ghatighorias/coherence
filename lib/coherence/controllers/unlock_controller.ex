@@ -40,7 +40,11 @@ defmodule Coherence.UnlockController do
   @spec create(conn, params) :: conn
   def create(conn, %{"unlock" => unlock_params} = params) do
     user_schema = Config.user_schema()
-    email = unlock_params["email"]
+    email =
+      unlock_params["email"]
+      |> String.downcase()
+      |> String.trim()
+
     password = unlock_params["password"]
 
     user =
